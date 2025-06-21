@@ -13,12 +13,11 @@
         @if ($blogs->count() > 0)
             <tbody>
                 @php $count = 1; @endphp
-                @foreach ($blogs as $blog)
+                @foreach ($blogs as $key => $blog)
                     <tr class="border-b-1 border-gray-200 odd:bg-white even:bg-gray-100 hover:bg-blue-50">
-                        <td class="py-4 text-center">
-                            {{ ($blogs->currentPage() - 1) * $blogs->perPage() + $loop->index + 1 }}</td>
+                        <td class="py-4 text-center">{{ ($blogs->currentPage() - 1) * $blogs->perPage() + $loop->index + 1 }}</td>
                         <td>{{ $blog->title }}</td>
-                        <td>{{ Str::limit($blog->content, 50) }}</td>
+                        <td>{!! Str::limit($blog->content, 30) !!}</td>
                         <td class="text-center">
                             @if ($blog->status == true)
                                 <a href="{{ route('change', $blog->id) }}"
