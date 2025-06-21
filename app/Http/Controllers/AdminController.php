@@ -3,12 +3,12 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
-use Illuminate\Support\Facades\DB;
+use App\Models\Blog;
 
 class AdminController extends Controller
 {
     function blogs() {
-        $blogs = DB::table('blogs')->paginate(3);
+        $blogs = Blog::orderBy('id', 'desc')->paginate(5);
         return view('blog', compact('blogs'));
     }
 
@@ -41,22 +41,22 @@ class AdminController extends Controller
             'status' => $request->status 
         ];
 
-        DB::table('blogs')->insert($data);
+        Blog::insert($data);
         
         return redirect(route('blog'));
     }
 
     function change($id) {
-        $blog = DB::table('blogs')->where('id', $id)->first();
+        $blog = Blog::find($id);
         $data = [
             'status' => !$blog->status
         ];
-        DB::table('blogs')->where('id', $id)->update($data);
-        return redirect(route('blog'));
+        Blog::find($id)->update($data);
+        return redirect()->back();
     }
 
     function edit($id) {
-        $blog = DB::table('blogs')->where('id', $id)->first();
+        $blog = Blog::find($id);
         return view('edit', compact('blog'));
     }
 
@@ -77,12 +77,12 @@ class AdminController extends Controller
             'content' => $request->content
         ];
 
-        $blog = DB::table('blogs')->where('id', $id)->update($data);
+        Blog::find($id)->update($data);
         return redirect(route('blog'));
     }
 
     function delete($id) {
-        DB::table('blogs')->where('id', $id)->delete();
-        return redirect(route('blog'));
+        Blog::find($id)->delete();
+        return redirect()->back();
     }
 }

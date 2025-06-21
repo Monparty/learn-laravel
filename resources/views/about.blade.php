@@ -1,6 +1,7 @@
-@extends('layout')
-@section('title', 'เกี่ยวกับเรา')
-@section('content')
-    <h1>ผู้ก่อพัฒนาระบบ : {{ $name }}</h1>
-    <h1>วันที่พัฒนาระบบ : {{ $date }}</h1>
-@endsection
+<x-app-layout>
+    <x-slot name="title">เกี่ยวกับเรา</x-slot>
+    <div class="grid gap-2">
+        <div>ผู้ก่อพัฒนาระบบ : {{ $name }}</div>
+        <div>วันที่พัฒนาระบบ : {{ $date }}</div>
+    </div>
+</x-app-layout>

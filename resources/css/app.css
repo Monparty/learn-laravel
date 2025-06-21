@@ -1,3 +1,9 @@
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
+
+ol, ul, menu {
+    list-style: auto;
+    margin: revert;
+    padding: revert;
+}

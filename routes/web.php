@@ -1,27 +1,28 @@
 <?php
 
+use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\AdminController;
-use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\BlogController;
 
-Route::get('/', function () {
-    return view('welcome');
-})->name('index');
-
-Route::get('/blog', [AdminController::class, 'blogs'])->name('blog');
+Route::get('/', [BlogController::class, 'index'])->name('index');
+Route::get('/detail/{id}', [BlogController::class, 'detail'])->name('detail');
 Route::get('/about', [AdminController::class, 'about'])->name('about');
-Route::get('/create', [AdminController::class, 'create'])->name('create');
-Route::post('/insert', [AdminController::class, 'insert'])->name('insert');
-Route::get('/delete/{id}', [AdminController::class, 'delete'])->name('delete');
-Route::get('/change/{id}', [AdminController::class, 'change'])->name('change');
-Route::get('/edit/{id}', [AdminController::class, 'edit'])->name('edit');
-Route::get('/update/{id}', [AdminController::class, 'update'])->name('update');
 
-Route::get('/dashboard', function () {
-    return view('dashboard');
-})->middleware(['auth', 'verified'])->name('dashboard');
+Route::middleware(['auth', 'verified'])->group(function () {
+    Route::prefix('author')->group(function() {
+        // crud
+        Route::get('/blog', [AdminController::class, 'blogs'])->name('blog');
+        Route::get('/create', [AdminController::class, 'create'])->name('create');
+        Route::post('/insert', [AdminController::class, 'insert'])->name('insert');
+        Route::get('/delete/{id}', [AdminController::class, 'delete'])->name('delete');
+        Route::get('/change/{id}', [AdminController::class, 'change'])->name('change');
+        Route::get('/edit/{id}', [AdminController::class, 'edit'])->name('edit');
+        Route::post('/update/{id}', [AdminController::class, 'update'])->name('update');
+    });
 
-Route::middleware('auth')->group(function () {
+    // profile
+    Route::get('/dashboard', [ProfileController::class, 'dashboard'])->name('dashboard');
     Route::get('/profile', [ProfileController::class, 'edit'])->name('profile.edit');
     Route::patch('/profile', [ProfileController::class, 'update'])->name('profile.update');
     Route::delete('/profile', [ProfileController::class, 'destroy'])->name('profile.destroy');

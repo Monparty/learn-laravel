@@ -11,6 +11,10 @@
         <link rel="preconnect" href="https://fonts.bunny.net">
         <link href="https://fonts.bunny.net/css?family=figtree:400,500,600&display=swap" rel="stylesheet" />
 
+        {{-- quill --}}
+        <link href="https://cdn.quilljs.com/1.3.6/quill.snow.css" rel="stylesheet">
+        <script src="https://cdn.quilljs.com/1.3.6/quill.js"></script>
+
         <!-- Scripts -->
         @vite(['resources/css/app.css', 'resources/js/app.js'])
     </head>
@@ -27,7 +31,7 @@
                 </header>
             @endisset
 
-            <div class="container mx-auto px-4 pt-4">
+            <div class="container mx-auto p-4">
                 {{ $slot ?? '' }}
             </div>
         </div>

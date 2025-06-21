@@ -9,6 +9,12 @@
                         </x-nav-link>
                     </div>
                 </div>
+                <div class="flex gap-4">
+                    <a href="{{ route('index') }}">home</a>
+                    <a href="{{ route('about') }}">about</a>
+                    <a href="{{ route('blog') }}">blogs</a>
+                    <a href="{{ route('create') }}">create</a>
+                </div>
                 <x-dropdown class="flex justify-end">
                     <x-slot name="trigger">
                         <button class="inline-flex items-center px-3 py-2 border border-transparent text-sm leading-4 font-medium rounded-md text-gray-500 dark:text-gray-400 bg-white dark:bg-gray-800 hover:text-gray-700 dark:hover:text-gray-300 focus:outline-none transition ease-in-out duration-150">
@@ -46,6 +52,7 @@
                 </div>
                 <div class="flex gap-4">
                     <a href="{{ route('index') }}">home</a>
+                    <a href="{{ route('about') }}">about</a>
                     <a href="{{ route('blog') }}">blogs</a>
                     <a href="{{ route('create') }}">create</a>
                     <a href="{{ route('login') }}">login</a>

@@ -12,8 +12,11 @@
             @enderror
         </div>
         <div>
-            <label for="content" class="block mb-2">เนื้อหาบทความ</label>
-            <textarea id="content" name="content" class="w-full rounded-md p-2 outline-1 outline-gray-300 field-sizing-content"></textarea>
+            <label for="quill_editor" class="block mb-2">เนื้อหาบทความ</label>
+            <div>
+                <div id="quill_editor" class="bg-white"></div>
+                <input type="hidden" id="quill_html" name="content"></input>
+            </div>
             @error('content')
                 <span class="text-sm text-red-400">
                     {{ $message }}
@@ -21,7 +24,7 @@
             @enderror
         </div>
         <div>
-            <label for="content" class="block mb-2">สถานะ</label>
+            <label class="block mb-2">สถานะ</label>
             <div class="flex items-center gap-2">
                 <input type="radio" name="status" id="s1" value="1" checked>
                 <label for="s1" class="block">เผยแพร่</label>
@@ -36,4 +39,12 @@
             <button type="submit" class="rounded-md bg-blue-600 px-4 py-2 hover:bg-blue-500 text-white">Save</button>
         </div>
     </form>
+    <script>
+        var quill = new Quill('#quill_editor', {
+                theme: 'snow'
+        });
+        quill.on('text-change', function(delta, oldDelta, source) {
+            document.getElementById("quill_html").value = quill.root.innerHTML;
+        });
+    </script>
 </x-app-layout>
