@@ -1,12 +1,5 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <title>create product</title>
-</head>
-<body>
+<x-app-layout>
+    <x-slot name="title">Edit product</x-slot>
     <a href="{{ route('products.index') }}">back</a>
     <form method="post" action="{{ route('products.update', $product->id) }}" enctype="multipart/form-data">
         @csrf
@@ -37,5 +30,4 @@
         </div>
         <button type="submit">Submit</button>
     </form>
-</body>
-</html>
+</x-app-layout>

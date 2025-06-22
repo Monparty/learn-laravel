@@ -1,12 +1,5 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <title>product list</title>
-</head>
-<body>
+<x-app-layout>
+    <x-slot name="title">Products list</x-slot>
     <a href="{{ route('products.create') }}">create</a>
     @session('success')
         <div>
@@ -14,7 +7,7 @@
         </div>
     @endsession
     <div>
-        <table>
+        <table class="table-auto w-full">
             <thead>
                 <tr>
                     <th>ID</th>
@@ -31,11 +24,18 @@
                         <td><img src="/images/{{ $product->image }}" alt="{{ $product->name }}" style="width: 80px; height: 80px; object-fit:cover;"></td>
                         <td>{{ $product->name }}</td>
                         <td>{{ $product->detail }}</td>
-                        <td><a href="{{ route('products.edit', $product->id) }}">Edit</a></td>
+                        <td>
+                            <form action="{{ route('products.destroy', $product->id) }}" method="post">
+                                @csrf
+                                @method('delete')
+                                <a href="{{ route('products.show', $product->id) }}">View</a>
+                                <a href="{{ route('products.edit', $product->id) }}">Edit</a>
+                                <button>Delete</button>
+                            </form>
+                        </td>
                     </tr>
                 @endforeach
             </tbody>
         </table>
     </div>
-</body>
-</html>
+</x-app-layout>

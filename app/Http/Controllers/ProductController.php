@@ -7,12 +7,12 @@ use App\Models\Product;
 
 class ProductController extends Controller
 {
-    public function index(Request $request) {
+    public function index() {
         $products = Product::latest()->get();
         return view('products.index', compact('products'));
     }
 
-    public function create(Request $request)
+    public function create()
     {
         return view('products.create');
     }
@@ -41,7 +41,7 @@ class ProductController extends Controller
         return redirect()->route('products.index')->with('success', 'Product created.');
     }
 
-    public function edit(Request $request, $id)
+    public function edit($id)
     {
         $product = Product::find($id);
         return view('products.edit', compact('product'));
@@ -53,16 +53,36 @@ class ProductController extends Controller
             [
             'name' => 'required',
             'detail' => 'required',
-            'file' => 'required|image'
             ],
         );
 
+        $fileName = ''; 
         if($request->hasFile('file')) {
             $fileName = time() . '.' . $request->file->extension();
             $request->file->move(public_path('images'), $fileName);
         }
 
         $product = Product::find($id);
-        // https://www.youtube.com/watch?v=NQtAKbygGCc   21 : 50
+        $product->name = $request->name;
+        $product->detail = $request->detail;
+
+        if(!empty($fileName)) {
+            $product->image = $fileName;
+        }
+
+        $product->save();
+        return redirect()->route('products.index')->with('success', 'Product updated.');
+    }
+
+    public function destroy($id) 
+    {
+        Product::find($id)->delete();
+        return redirect()->back()->with('success', 'Product deleted.');
+    }
+
+    public function show($id)
+    {
+        $product = Product::find($id);
+        return view('products.show', compact('product'));
     }
 }

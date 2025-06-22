@@ -9,11 +9,12 @@
                         </x-nav-link>
                     </div>
                 </div>
-                <div class="flex gap-4">
-                    <a href="{{ route('index') }}">home</a>
-                    <a href="{{ route('about') }}">about</a>
-                    <a href="{{ route('blog') }}">blogs</a>
-                    <a href="{{ route('create') }}">create</a>
+                <div class="flex gap-6">
+                    <a href="{{ route('index') }}">Home</a>
+                    <a href="{{ route('products.index') }}">Product</a>
+                    <a href="{{ route('about') }}">About</a>
+                    <a href="{{ route('blog') }}">Blogs</a>
+                    <a href="{{ route('create') }}">Create blogs</a>
                 </div>
                 <x-dropdown class="flex justify-end">
                     <x-slot name="trigger">
@@ -50,13 +51,14 @@
                         </x-nav-link>
                     </div>
                 </div>
-                <div class="flex gap-4">
-                    <a href="{{ route('index') }}">home</a>
-                    <a href="{{ route('about') }}">about</a>
-                    <a href="{{ route('blog') }}">blogs</a>
-                    <a href="{{ route('create') }}">create</a>
-                    <a href="{{ route('login') }}">login</a>
-                    <a href="{{ route('register') }}">register</a>
+                <div class="flex gap-6">
+                    <a href="{{ route('index') }}">Home</a>
+                    <a href="{{ route('about') }}">About</a>
+                    <a href="{{ route('products.index') }}">Product</a>
+                    <a href="{{ route('blog') }}">Blogs</a>
+                    <a href="{{ route('create') }}">Create blogs</a>
+                    <a href="{{ route('login') }}">Login</a>
+                    <a href="{{ route('register') }}">Register</a>
                 </div>
             </div>
             @endif

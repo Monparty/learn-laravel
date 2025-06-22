@@ -10,11 +10,14 @@ Route::get('/', [BlogController::class, 'index'])->name('index');
 Route::get('/detail/{id}', [BlogController::class, 'detail'])->name('detail');
 Route::get('/about', [AdminController::class, 'about'])->name('about');
 
-Route::get('/products', [ProductController::class, 'index'])->name('products.index');
-Route::get('/products/create', [ProductController::class, 'create'])->name('products.create');
-Route::post('/products', [ProductController::class, 'store'])->name('products.store');
-Route::get('/products/{id}', [ProductController::class, 'edit'])->name('products.edit');
-Route::put('/products/{id}', [ProductController::class, 'update'])->name('products.update');
+// Route::get('/products', [ProductController::class, 'index'])->name('products.index');
+// Route::get('/products/create', [ProductController::class, 'create'])->name('products.create');
+// Route::post('/products', [ProductController::class, 'store'])->name('products.store');
+// Route::get('/products/{id}', [ProductController::class, 'edit'])->name('products.edit');
+// Route::put('/products/{id}', [ProductController::class, 'update'])->name('products.update');
+// Route::get('/delete/{id}', [ProductController::class, 'delete'])->name('products.delete');
+
+Route::resource('products', ProductController::class);
 
 Route::middleware(['auth', 'verified'])->group(function () {
     Route::prefix('author')->group(function() {
